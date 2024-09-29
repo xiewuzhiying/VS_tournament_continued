@@ -9,13 +9,18 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.jetbrains.annotations.NotNull;
-import org.valkyrienskies.core.impl.config.VSConfigClass;
+import org.valkyrienskies.core.apigame.VSCore;
+import org.valkyrienskies.core.apigame.VSCoreFactory;
+import org.valkyrienskies.mod.common.ValkyrienSkiesMod;
+import org.valkyrienskies.mod.fabric.common.FabricHooksImpl;
+import org.valkyrienskies.mod.fabric.common.VSFabricNetworking;
 import org.valkyrienskies.tournament.*;
 import org.valkyrienskies.mod.compat.clothconfig.VSClothConfig;
 import org.valkyrienskies.mod.fabric.common.ValkyrienSkiesModFabric;
@@ -26,6 +31,7 @@ public class TournamentModFabric implements ModInitializer {
     public void onInitialize() {
         // force VS2 to load before Tournament
         new ValkyrienSkiesModFabric().onInitialize();
+        ValkyrienSkiesMod.vsCore.registerConfigLegacy("vs_tournament", TournamentConfig.class);
 
         Registry.register(
                 BuiltInRegistries.CREATIVE_MODE_TAB,
@@ -34,7 +40,6 @@ public class TournamentModFabric implements ModInitializer {
         );
 
         ServerTickEvents.END_SERVER_TICK.register(TickScheduler.INSTANCE::tickServer);
-
         TournamentMod.init();
     }
 
@@ -65,7 +70,7 @@ public class TournamentModFabric implements ModInitializer {
         public ConfigScreenFactory<?> getModConfigScreenFactory() {
             return (parent) -> VSClothConfig.createConfigScreenFor(
                     parent,
-                    VSConfigClass.Companion.getRegisteredConfig(TournamentConfig.class)
+                    TournamentConfig.class
             );
         }
     }

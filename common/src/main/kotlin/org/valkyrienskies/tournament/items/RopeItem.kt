@@ -12,7 +12,6 @@ import org.valkyrienskies.mod.common.dimensionId
 import org.valkyrienskies.mod.common.getShipObjectManagingPos
 import org.valkyrienskies.mod.common.shipObjectWorld
 import org.valkyrienskies.mod.common.util.toJOMLD
-import org.valkyrienskies.physics_api.ConstraintId
 import org.valkyrienskies.tournament.blocks.RopeHookBlock
 import org.valkyrienskies.tournament.TournamentBlocks
 import org.valkyrienskies.tournament.TournamentConfig
@@ -24,7 +23,7 @@ class RopeItem : Item(
 
     private var clickedPosition: BlockPos? = null
     private var clickedShipId: ShipId? = null
-    private var ropeConstraintId: ConstraintId? = null
+    private var ropeConstraintId: VSConstraintId? = null
 
     override fun useOn(context: UseOnContext): InteractionResult {
 

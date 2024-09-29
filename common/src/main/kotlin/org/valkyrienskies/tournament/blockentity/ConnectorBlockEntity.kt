@@ -14,10 +14,13 @@ import org.joml.Vector3dc
 import org.valkyrienskies.core.api.ships.ServerShip
 import org.valkyrienskies.core.api.ships.properties.ShipId
 import org.valkyrienskies.core.apigame.constraints.VSAttachmentConstraint
-import org.valkyrienskies.mod.common.*
+import org.valkyrienskies.core.apigame.constraints.VSConstraintId
+import org.valkyrienskies.mod.common.dimensionId
+import org.valkyrienskies.mod.common.getShipObjectManagingPos
+import org.valkyrienskies.mod.common.shipObjectWorld
+import org.valkyrienskies.mod.common.transformFromWorldToNearbyShipsAndWorld
 import org.valkyrienskies.mod.common.util.toJOML
 import org.valkyrienskies.mod.common.util.toMinecraft
-import org.valkyrienskies.physics_api.ConstraintId
 import org.valkyrienskies.tournament.TournamentBlockEntities
 import org.valkyrienskies.tournament.TournamentBlocks
 import org.valkyrienskies.tournament.util.extension.toBlock
@@ -28,7 +31,7 @@ import kotlin.streams.asSequence
 class ConnectorBlockEntity(pos: BlockPos, state: BlockState):
     BlockEntity(TournamentBlockEntities.CONNECTOR.get(), pos, state)
 {
-    var constraint: ConstraintId? = null
+    var constraint: VSConstraintId? = null
     var constraintData: VSAttachmentConstraint? = null
     var otherbesec: BlockPos? = null
     var redstoneLevel = 0

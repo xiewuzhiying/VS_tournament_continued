@@ -8,11 +8,6 @@ import org.joml.Math
 import org.valkyrienskies.core.apigame.world.chunks.BlockType
 import org.valkyrienskies.mod.common.BlockStateInfo
 import org.valkyrienskies.mod.common.BlockStateInfoProvider
-import org.valkyrienskies.physics_api.Lod1BlockStateId
-import org.valkyrienskies.physics_api.Lod1LiquidBlockStateId
-import org.valkyrienskies.physics_api.Lod1SolidBlockStateId
-import org.valkyrienskies.physics_api.voxel.Lod1LiquidBlockState
-import org.valkyrienskies.physics_api.voxel.Lod1SolidBlockState
 
 object TournamentWeights  {
     fun register() {
@@ -35,14 +30,5 @@ object TournamentWeights  {
 
         override fun getBlockStateType(blockState: BlockState): BlockType? =
             null
-
-        override val solidBlockStates =
-            emptyList<Lod1SolidBlockState>()
-
-        override val liquidBlockStates =
-            emptyList<Lod1LiquidBlockState>()
-
-        override val blockStateData =
-            emptyList<Triple<Lod1SolidBlockStateId, Lod1LiquidBlockStateId, Lod1BlockStateId>>()
     }
 }

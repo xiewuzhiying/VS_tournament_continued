@@ -4,10 +4,8 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.google.common.util.concurrent.AtomicDouble
 import net.minecraft.core.BlockPos
-import net.minecraft.world.phys.AABB
 import org.joml.Vector3d
 import org.joml.Vector3i
-import org.joml.primitives.AABBd
 import org.valkyrienskies.core.api.ships.*
 import org.valkyrienskies.core.apigame.world.properties.DimensionId
 import org.valkyrienskies.core.impl.game.ships.PhysShipImpl
@@ -101,7 +99,7 @@ class TournamentShips: ShipForcesInducer {
             }
         }
 
-        val vel = physShip.poseVel.vel
+        val vel = physShip.poseVel.c
 
         thrusters.forEach { data ->
             val (pos, force, tier, submerged) = data
@@ -115,7 +113,7 @@ class TournamentShips: ShipForcesInducer {
 
             if (force.isFinite && (
                 TournamentConfig.SERVER.thrusterShutoffSpeed == -1.0
-                    || physShip.poseVel.vel.length() < TournamentConfig.SERVER.thrusterShutoffSpeed
+                    || physShip.poseVel.c.length() < TournamentConfig.SERVER.thrusterShutoffSpeed
                 )
             ) {
                 physShip.applyInvariantForceToPos(tForce.mul(TournamentConfig.SERVER.thrusterSpeed * tier), tPos)
